@@ -16,7 +16,7 @@ votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)
 
 
 # PLOT SETTINGS
-plot.height <- 500
+plot.height <- 550
 outputDir <- "graphics"
 
 if(!file.exists(outputDir)) {
@@ -78,35 +78,38 @@ for(votetype in levels(votes.read$type)) {
 		color1 <- '#336666'
 		subtitle.x <- 5
 		subtitle.align <- "left"
+		resetZoomButton.align <- "right"
 		if(typeShort == 'facultativeReferendum') {
-			color0.5 <- '#C2D6D6'
-			color1 <- '#5C8A8A'
+			color0.5 <- '#C2C2D1'
+			color1 <- '##333366'
 		}
 		if(typeShort == 'mandatoryReferendum') {
-			color0.5 <- '#ADADC2'
+			color0.5 <- '#C2C2D1'
 			color1 <- '#333366'
 			subtitle.align <- "right"
 			subtitle.x <- -5
+			resetZoomButton.align <- "left"
 		}
 
 		## Create the new name as an HTML table (http://rcharts.io/viewer/?5735146)
 
 		data$name <- paste0(
 			'<table cellpadding="1" style="line-height:1.4">',
-		        '<tr><td>', data$date, '</td>',
+		        '<tr><td><div style="font-size:0.9em">', data$date, '</td></div>',
 					'<td></td><td></td></tr>',
-		       '<tr><td colspan="3"><i>', data$name, '</i><hr></td></tr>',
+		       '<tr><td colspan="3"><i><div style="font-size:1.1em">', data$name, '</i></div><hr></td></tr>',
 		       '<tr><td align="left">', trad["tp.yes",lang], ': <b>', round(data$value, 1), '%</b>', '</td><td></td>',
 			   		'<td style="text-align:right">', trad["tp.turnout",lang],  " : ",
 					ifelse(round(data$Turnout, 1) == 0, " ", paste0(round(data$Turnout, 1), "%")), '</td></tr>',
-				'<tr><td colspan="3" align="center"><div style="color:#CCCCCC">',
+				'<tr><td colspan="3" align="center"><div style="color:#999999">',
 					ifelse(data$result == "no", trad["tp.refused",lang], trad["tp.accepted",lang]), '</td></tr>',
 			'</table></div>')
 
 		## Heatmap column chart
 		a <- Highcharts$new()
 		# use type='heatmap' for heat maps
-		a$chart(zoomType = "xy", type = 'heatmap', height = plot.height, plotBackgroundColor = "#f7f5ed", spacing = 5)
+		a$chart(zoomType = "x", type = 'heatmap', height = plot.height, plotBackgroundColor = "#f7f5ed", spacing = 5,
+			resetZoomButton = list(position = list( align = resetZoomButton.align )))
 		a$series(hSeries2(data, "result"))
 
 		a$addParams(colorAxis =
@@ -122,6 +125,7 @@ for(votetype in levels(votes.read$type)) {
 		         layout='horizontal',
 		         margin=-42,
 		         verticalAlign='top',
+				 symbolWidth = 100,
 		         symbolHeight=5
 		)
 

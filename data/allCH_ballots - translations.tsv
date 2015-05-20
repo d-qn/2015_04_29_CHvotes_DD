@@ -6,11 +6,11 @@ tp.refused	rejeté
 title.initiative	Initiatives populaires
 title.mandatoryReferendum	Référendums obligatoires
 title.facultativeReferendum	Référendums facultatifs
-descr1.initiative	INTERACTIF: Explorer toutes les initiatives populaires soumises au vote national en Suisse de
-descr2.initiative	. Le % de oui pour chaque initiative populaire est coloré en rouge (moins de 50%) ou bleu (plus de 50% de oui). 
-descr1.mandatoryReferendum	INTERACTIF: Explorer toutes les référendums obligatoires soumis au vote national en Suisse de
-descr2.mandatoryReferendum	. Le % de oui pour chaque référendum obligatoire est coloré en rouge (moins de 50%) ou vert (plus de 50% de oui). 
-descr1.facultativeReferendum	INTERACTIF: Explorer toutes les référendums obligatoires soumis au vote national en Suisse de
-descr2.facultativeReferendum	. Le % de oui pour chaque référendum obligatoire est coloré en rouge (moins de 50%) ou bleu (plus de 50% de oui).
-subtitle	Sélectionner une région du graphique ou pincer pour zoomer. Déplacer votre curseur ou toucher un carré pour en lire plus.
+descr1.initiative	Toutes les initiatives populaires soumises au vote national en Suisse (
+descr2.initiative	). Le % de oui pour chaque initiative populaire est coloré en rouge (moins de 50%) ou bleu (plus de 50% de oui). 
+descr1.mandatoryReferendum	Tous les référendums obligatoires soumis au vote national en Suisse (
+descr2.mandatoryReferendum	). Le % de oui pour chaque référendum obligatoire est coloré en rouge (moins de 50%) ou bleu (plus de 50% de oui). 
+descr1.facultativeReferendum	Tous les référendums obligatoires soumis au vote national en Suisse (
+descr2.facultativeReferendum	). Le % de oui pour chaque référendum obligatoire est coloré en rouge (moins de 50%) ou bleu (plus de 50% de oui).
+subtitle	Sélectionner une région du graphique ou pincer pour zoomer. Déplacer votre curseur sur un carré pour en savoir plus sur un vote.
 source	source: C2D.ch
