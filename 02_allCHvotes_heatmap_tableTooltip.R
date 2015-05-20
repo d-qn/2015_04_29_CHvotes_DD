@@ -90,13 +90,15 @@ for(votetype in levels(votes.read$type)) {
 		}
 
 		## Create the new name as an HTML table (http://rcharts.io/viewer/?5735146)
+
 		data$name <- paste0(
 			'<table cellpadding="1" style="line-height:1.4">',
 		        '<tr><td>', data$date, '</td>',
 					'<td></td><td></td></tr>',
 		       '<tr><td colspan="3"><i>', data$name, '</i><hr></td></tr>',
 		       '<tr><td align="left">', trad["tp.yes",lang], ': <b>', round(data$value, 1), '%</b>', '</td><td></td>',
-			   		'<td style="text-align:right">', trad["tp.turnout",lang],  " : ", round(data$Turnout, 1), '%</td></tr>',
+			   		'<td style="text-align:right">', trad["tp.turnout",lang],  " : ",
+					ifelse(round(data$Turnout, 1) == 0, " ", paste0(round(data$Turnout, 1), "%")), '</td></tr>',
 				'<tr><td colspan="3" align="center"><div style="color:#CCCCCC">',
 					ifelse(data$result == "no", trad["tp.refused",lang], trad["tp.accepted",lang]), '</td></tr>',
 			'</table></div>')
