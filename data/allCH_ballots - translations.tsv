@@ -12,5 +12,6 @@ descr1.mandatoryReferendum	Tous les référendums obligatoires soumis au vote na
 descr2.mandatoryReferendum	). Le % de oui pour chaque référendum obligatoire est coloré en rouge (moins de 50%) ou bleu (plus de 50% de oui). 
 descr1.facultativeReferendum	Tous les référendums obligatoires soumis au vote national en Suisse (
 descr2.facultativeReferendum	). Le % de oui pour chaque référendum obligatoire est coloré en rouge (moins de 50%) ou bleu (plus de 50% de oui).
-subtitle	Sélectionner une région du graphique ou pincer pour zoomer. Déplacer votre curseur sur un carré pour en savoir plus sur un vote.
+subtitle1	Sélectionner une région du graphique ou pincer pour zoomer.
+subtitle2	Déplacer votre curseur sur un carré pour en savoir plus sur un vote.
 source	source: C2D.ch

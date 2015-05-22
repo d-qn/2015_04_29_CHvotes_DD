@@ -16,7 +16,7 @@ votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)
 
 
 # PLOT SETTINGS
-plot.height <- 550
+plot.height <- 500
 outputDir <- "graphics"
 
 if(!file.exists(outputDir)) {
@@ -45,8 +45,8 @@ votes.read <- do.call(rbind, by(votes.read, list(votes.read$year, votes.read$typ
 ############################################################################################
 
 ##### DEBUGGING CASE ~~~~~~~~~~~~
-# votetype <- levels(votes.read$type)[2]
-# lang <- colnames(trad)[1]
+votetype <- levels(votes.read$type)[2]
+lang <- colnames(trad)[1]
 
 
 for(votetype in levels(votes.read$type)) {
@@ -137,17 +137,22 @@ for(votetype in levels(votes.read$type)) {
 		a$tooltip(formatter = "#! function() { return this.point.name; } !#", useHTML = T,
 			borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)', style = list(padding = 3))
 
-		a$subtitle(text = gsub('(.{1,50})(\\s|$)', '\\1\\<br\\>', trad['subtitle',lang]),
-				useHTML = T, align = subtitle.align, x = subtitle.x, floating = T, style = list(color = '#d4c3aa', fontSize = "0.6em"))
+		addhtmlbreak <- function(text) {
+			gsub('(.{1,30})(\\s|$)', '\\1\\<br\\>', text)
+		}
+		subtitle <-  paste(addhtmlbreak(trad['subtitle1',lang]), addhtmlbreak(trad['subtitle2',lang]), sep = "<br><br>")
+		a$subtitle(text = subtitle, useHTML = T, align = subtitle.align, x = subtitle.x, floating = T,
+			style = list(color = '#d4c3aa', fontSize = "0.6em"))
 
 		a$addAssets(c("https://code.highcharts.com/modules/heatmap.js"))
 		a$save(destfile = tmpOuputfile)
 
-		yRange <- paste(range(data$x), collapse = "-")
 
+		yRange <- paste(range(data$x), collapse = "-")
 		hChart2responsiveHTML(tmpOuputfile, output.html = output.html, output = outputDir, h2 = trad[eval(paste("title", typeShort, sep = ".")),lang],
-		descr = paste0(trad[eval(paste("descr1", typeShort, sep = ".")),lang], " ", yRange, trad[eval(paste("descr2", typeShort, sep = ".")),lang]),
+			descr = paste0(trad[eval(paste("descr1", typeShort, sep = ".")),lang], yRange, trad[eval(paste("descr2", typeShort, sep = ".")),lang]),
 			source = trad["source",lang], h3 = "", author = ' <a href = "http://www.swissinfo.ch">swissinfo.ch</a>')
+
 		browseURL(file.path(outputDir, output.html))
 
 	} # end loop language
