@@ -1,17 +1,11 @@
-code	fre
-tp.yes	Oui
-tp.turnout	Participation
-tp.accepted	accepté
-tp.refused	rejeté
-title.initiative	Initiatives populaires
-title.mandatoryReferendum	Référendums obligatoires
-title.facultativeReferendum	Référendums facultatifs
-descr1.initiative	Toutes les initiatives populaires soumises au vote national en Suisse (
-descr2.initiative	). Le % de oui pour chaque initiative populaire est coloré en rouge (moins de 50%) ou bleu (plus de 50% de oui). 
-descr1.mandatoryReferendum	Tous les référendums obligatoires soumis au vote national en Suisse (
-descr2.mandatoryReferendum	). Le % de oui pour chaque référendum obligatoire est coloré en rouge (moins de 50%) ou bleu (plus de 50% de oui). 
-descr1.facultativeReferendum	Tous les référendums obligatoires soumis au vote national en Suisse (
-descr2.facultativeReferendum	). Le % de oui pour chaque référendum obligatoire est coloré en rouge (moins de 50%) ou bleu (plus de 50% de oui).
-subtitle1	Sélectionner une région du graphique ou pincer pour zoomer.
-subtitle2	Déplacer votre curseur sur un carré pour en savoir plus sur un vote.
-source	source: C2D.ch
+code	eng	ger	fre	ita	spa	por	jpn	chi	rus	ara
+tp.yes	Yes	Ja	Oui	Sì	Sí	Sim	賛成	赞成	Да	نعم
+tp.turnout	Turnout	Wahlbeteiligung	Participation	Partecipazione	Participación	Participação	投票率	参与率	Участие	نسبة المشاركة
+tp.accepted	Accepted	angenommen	accepté	accettato	aceptado	aprovado	可決	通过	Одобрено	تمت الموافقة عليه
+tp.refused	Rejected	abgelehnt	rejeté	respinto	rechazado	rejeitado	否決	否决	Отклонено	تم رفضه
+title.initiative	People's initiatives	Volksinitiativen	Initiatives populaires	Iniziative popolari	Iniciativas populares	Iniciativas populares	イニシアチブ（国民発議）	公民动议	Народная законодательная инициатива	مبادرات شعبية
+title.mandatoryReferendum	Mandatory referendums	Obligatorische Referenden	Référendums obligatoires	Referendum obbligatori	Referéndums obligatorios	Referendo obrigatório	強制的レファレンダム	强制复决	Обязательный референдум	استفتاءات إجبارية
+title.facultativeReferendum	Optional referendums	Fakultative Referenden	Référendums facultatifs	Referendum facoltativi	Referéndums facultativos	Referendo facultativo	任意のレファレンダム	公民复决	Факультативный референдум	استفتاءات اختيارية
+source1	source:	Quelle:	source:	fonte:	fuente	fonte:	出典	来源：	Источник:	المصدر
+source2	c2d.ch	c2d.ch	c2d.ch	c2d.ch	c2d.ch	c2d.ch	c2d.ch	c2d.ch	c2d.ch	c2d.ch
+sourceLink	https://docs.google.com/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit?usp=sharing	https://docs.google.com/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit?usp=sharing	https://docs.google.com/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit?usp=sharing	https://docs.google.com/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit?usp=sharing	https://docs.google.com/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit?usp=sharing	https://docs.google.com/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit?usp=sharing	https://docs.google.com/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit?usp=sharing	https://docs.google.com/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit?usp=sharing	https://docs.google.com/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit?usp=sharing	https://docs.google.com/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit?usp=sharing

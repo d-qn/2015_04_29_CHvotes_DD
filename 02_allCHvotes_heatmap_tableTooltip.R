@@ -7,7 +7,7 @@ library("dplyr")
 ############################################################################################
 
 # download the raw file without footer!!!
-votefile <- "data/allCH_ballots - VOTES_allCH_2015-05-13.csv"
+votefile <- "data/allCH_ballots - VOTES_allCH_2015-06-08.csv"
 votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)
 
 trad <- read.csv("data/allCH_ballots - translations.tsv", sep ="\t", row.names = 1, stringsAsFactors = F)
@@ -16,7 +16,7 @@ votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)
 
 
 # PLOT SETTINGS
-plot.height <- 500
+plot.height <- 520
 outputDir <- "graphics"
 
 if(!file.exists(outputDir)) {
@@ -93,17 +93,32 @@ for(votetype in levels(votes.read$type)) {
 
 		## Create the new name as an HTML table (http://rcharts.io/viewer/?5735146)
 
-		data$name <- paste0(
-			'<table cellpadding="1" style="line-height:1.4">',
-		        '<tr><td><div style="font-size:0.9em">', data$date, '</td></div>',
-					'<td></td><td></td></tr>',
-		       '<tr><td colspan="3"><i><div style="font-size:1.1em">', data$name, '</i></div><hr></td></tr>',
-		       '<tr><td align="left">', trad["tp.yes",lang], ': <b>', round(data$value, 1), '%</b>', '</td><td></td>',
-			   		'<td style="text-align:right">', trad["tp.turnout",lang],  " : ",
-					ifelse(round(data$Turnout, 1) == 0, " ", paste0(round(data$Turnout, 1), "%")), '</td></tr>',
-				'<tr><td colspan="3" align="center"><div style="color:#999999">',
-					ifelse(data$result == "no", trad["tp.refused",lang], trad["tp.accepted",lang]), '</td></tr>',
-			'</table></div>')
+		if(lang == "ara") {
+			data$name <- paste0(
+				'<table cellpadding="1" style="line-height:1.4">',
+			        '<tr><td align="right"><div style="font-size:0.95em">', data$date, '</td></div>',
+						'<td></td><td></td></tr>',
+			       '<tr><td colspan="3" align="right"><b><div style="font-size:1.2em">', data$name, '</b></div><hr></td></tr>',
+			       '<tr><td align="right">', trad["tp.yes",lang], ': <b>', round(data$value, 1), '%</b>', '</td><td></td>',
+				   		'<td align="left">', trad["tp.turnout",lang],  " : ",
+						ifelse(round(data$Turnout, 1) == 0, " ", paste0(round(data$Turnout, 1), "%")), '</td></tr>',
+					'<tr><td colspan="3" align="center"><div style="color:#999999">',
+						ifelse(data$result == "no", trad["tp.refused",lang], trad["tp.accepted",lang]), '</td></tr>',
+				'</table></div>')
+		} else {
+			data$name <- paste0(
+				'<table cellpadding="1" style="line-height:1.4">',
+			        '<tr><td><div style="font-size:0.9em">', data$date, '</td></div>',
+						'<td></td><td></td></tr>',
+			       '<tr><td colspan="3"><i><div style="font-size:1.1em">', data$name, '</i></div><hr></td></tr>',
+			       '<tr><td align="left">', trad["tp.yes",lang], ': <b>', round(data$value, 1), '%</b>', '</td><td></td>',
+				   		'<td style="text-align:right">', trad["tp.turnout",lang],  " : ",
+						ifelse(round(data$Turnout, 1) == 0, " ", paste0(round(data$Turnout, 1), "%")), '</td></tr>',
+					'<tr><td colspan="3" align="center"><div style="color:#999999">',
+						ifelse(data$result == "no", trad["tp.refused",lang], trad["tp.accepted",lang]), '</td></tr>',
+				'</table></div>')
+		}
+
 
 		## Heatmap column chart
 		a <- Highcharts$new()
@@ -138,22 +153,22 @@ for(votetype in levels(votes.read$type)) {
 			borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)', style = list(padding = 3))
 
 		addhtmlbreak <- function(text) {
-			gsub('(.{1,30})(\\s|$)', '\\1\\<br\\>', text)
+			gsub('(.{1,35})(\\s|$)', '\\1\\<br\\>', text)
 		}
-		subtitle <-  paste(addhtmlbreak(trad['subtitle1',lang]), addhtmlbreak(trad['subtitle2',lang]), sep = "<br><br>")
-		a$subtitle(text = subtitle, useHTML = T, align = subtitle.align, x = subtitle.x, floating = T,
-			style = list(color = '#d4c3aa', fontSize = "0.6em"))
-
 		a$addAssets(c("https://code.highcharts.com/modules/heatmap.js"))
 		a$save(destfile = tmpOuputfile)
 
-
 		yRange <- paste(range(data$x), collapse = "-")
-		hChart2responsiveHTML(tmpOuputfile, output.html = output.html, output = outputDir, h2 = trad[eval(paste("title", typeShort, sep = ".")),lang],
-			descr = paste0(trad[eval(paste("descr1", typeShort, sep = ".")),lang], yRange, trad[eval(paste("descr2", typeShort, sep = ".")),lang]),
-			source = trad["source",lang], h3 = "", author = ' <a href = "http://www.swissinfo.ch">swissinfo.ch</a>')
+		if(lang == "ara") {
+			yRange <- paste(rev(range(data$x)), collapse = "-")
+		}
 
-		browseURL(file.path(outputDir, output.html))
+		h2title <- paste0(trad[eval(paste("title", typeShort, sep = ".")),lang], " (", yRange, ")")
+		source <- paste0(trad["source1",lang], '<a href="', trad["sourceLink",lang], '" target = "_blank"> ', trad["source2",lang], '</a>')
+		hChart2responsiveHTML(tmpOuputfile, output.html = output.html, output = outputDir, h2 = h2title,
+			descr = "", source = source, h3 = "", author = ' <a href = "http://www.swissinfo.ch">swissinfo.ch</a>')
+
+		#browseURL(file.path(outputDir, output.html))
 
 	} # end loop language
 

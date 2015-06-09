@@ -1,66 +1,3 @@
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank())
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank())
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank())
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(), axis.text = element_blank())
-path.ch <- getPathShp('CH')
-path.ch
-getShpLayers(path.ch)
-ch <- readOGR(path.ch, layer = 'municipalities')
-ch.df <- formatShp(ch)
-str(ch.df)
-ggplot(ch.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = GEMNAME)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(), axis.text = element_blank())
-lake <- readOGR(path.ch, layer = "lakes")#
-country <- readOGR(path.ch, layer = "country")
-lake.df <- formatShp(readOGR(path.ch, layer = "lakes"))#
-country.df <- formatShp(readOGR(path.ch, layer = "country"))
-alpha
-lake.df <- formatShp(readOGR(path.ch, layer = "lakes"))#
-country.df <- formatShp(readOGR(path.ch, layer = "country"))#
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + #
-  geom_polygon(data = lake.df, fill = alpha("lightgrey", alpha = 1), colour = alpha("lightgrey", alpha = 1))
-ch.communes <- ggplot(ch.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = GEMNAME)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(), axis.text = element_blank())#
-ch.communes
-lake.df <- formatShp(readOGR(path.ch, layer = "lakes"))#
-country.df <- formatShp(readOGR(path.ch, layer = "country"))#
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + #
-  geom_polygon(data = lake.df, fill = alpha("lightgrey", alpha = 1), colour = alpha("lightgrey", alpha = 1))
-?alpha
-library(swiMap)
-?getShpLayers
-require(rgdal)#
-require(rgeos)#
-require(ggplot2)#
-path <- getPathShp('world')#
-layers <- getShpLayers(path)#
-# read shapefiles for given layer#
-world <- readOGR(path, layer = layers[1])#
-world.df <- formatShp(world)#
-# plot world map#
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) +#
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(), axis.text = element_blank())#
-Same with swiss commune map (slow!)#
-## Not run: #
-path.ch <- getPathShp('CH')#
-ch <- readOGR(path.ch, layer = 'municipalities')#
-ch.df <- formatShp(ch)#
-# plot swiss commune map#
-ch.communes <- ggplot(ch.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = GEMNAME)) +#
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(), axis.text = element_blank())#
-ch.communes
-lake.df <- formatShp(readOGR(path.ch, layer = "lakes"))#
-country.df <- formatShp(readOGR(path.ch, layer = "country"))
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + geom_polygon(data = lake.df, fill = alpha("lightgrey", alpha = 1), colour = alpha("lightgrey", alpha = 1))
-library(scales)
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + geom_polygon(data = lake.df, fill = alpha("lightgrey", alpha = 1), colour = alpha("lightgrey", alpha = 1))
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + geom_polygon(data = lake.df, fill = "lightgrey", colour = "lightgrey")
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 1) + geom_polygon(data = lake.df, fill = "lightgrey", colour = "lightgrey")
-str(country.df)
 library(swiMap)
 ?getShpLayers
 require(rgdal)#
@@ -501,230 +438,304 @@ hSeries2 <- hSeries2(data.frame(x = x, y = y, z = z, color = color, name = name,
 b$series(hSeries2)
 b
 install.packages("readr")
+install.package("devtools")
+install.packages("devtools")
+install.packages("rCharts")
+install.packages("devtools")#
+require(devtools)#
+install_github('rCharts', 'ramnathv')#
+library(rCharts)
+install_github(ramnathv/rCharts)
 setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+install.packages("devtools")#
+require(devtools)#
+install_github('rCharts', 'ramnathv')#
 library(rCharts)#
 #
-### CREDITS#
-# http://stefan-wilhelm.net/interactive-highcharts-heat-maps-in-r-with-rcharts/#
-#
-### Load the data file#
+# Load the data file#
 data <- read.csv("citizenIniatives_ch.csv", stringsAsFactors = F)#
 #
-### Aggregate the data by year#
+# Get only the year from each date (not an elegant solution here, better to use date)#
 data$year <- as.numeric(substr(data$date,1, 4))#
 #
-# add counter of the observations (initiatives) per year. counter starts at 0#
+# add the count of observations (votes) per year. The count starts at 0 each year#
 data <- do.call(rbind, by(data, data$year, function(dd) cbind(dd, n = as.numeric(0:(nrow(dd)-1)))))#
 rownames(data) <- NULL#
 #
-# change the names of the data.frame to be highcharts friendly#
+# change the names of the data.frame to be highcharts-friendly#
 colnames(data) <- c('date', 'name', 'value', 'x', 'y')#
+#
 ### PLOT#
 a <- Highcharts$new()#
-# use type='heatmap' for heat maps#
-a$chart(zoomType = "xy", type = 'heatmap', width = 1000)#
-# Pass the data.#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
 a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
+#
 # Define the color scale#
-a$addParams(colorAxis =#
-  list(min = 0, max = 100, stops = list(#
-	  list(0, '#ab3d3f'),#
-      list(0.499, '#EED8D9'),#
-      list(0.5, '#ADC2C2'),#
-      list(1, '#336666')#
-  ))#
-)#
-a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
-	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
-#
-# formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + this.point.x + ',</b> the initative:<br><i>' +#
-# 	this.point.name + '</i>gathered <b>' + this.point.value + '%</b> of yes</div>'; } !#"#
-#
-# formatter <- paste0("#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">",#
-# 	trad[eval(paste("tp", "In", sep = ".")), lang], " <b>'+ this.point.x + ',</b> ", gsub("'", " ", trad[eval(paste("tp", typeShort, sep = ".")),lang]),#
-# 	 ":<br><br><i>' + this.point.name + '</i><br>", trad[eval(paste("tp", "yield", sep = ".")),lang], " <b>' + this.point.value + '%</b> ",#
-# 	  trad[eval(paste("tp", "ofyes", sep = ".")),lang], "</div>'; } !#")#
-##
-# a$tooltip(formatter = formatter, useHTML = T, borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)')#
-#
-a$addAssets(js =#
-   c("https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js",#
-     "https://code.highcharts.com/highcharts.js",#
-     "https://code.highcharts.com/highcharts-more.js",#
-     "https://code.highcharts.com/modules/exporting.js",#
-     "https://code.highcharts.com/modules/heatmap.js"#
-     )#
-)#
-a
-setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
-library(rCharts)#
-#
-### CREDITS#
-# http://stefan-wilhelm.net/interactive-highcharts-heat-maps-in-r-with-rcharts/#
-#
-### Load the data file#
-data <- read.csv("citizenIniatives_ch.csv", stringsAsFactors = F)#
-#
-### Aggregate the data by year#
-data$year <- as.numeric(substr(data$date,1, 4))#
-#
-# add counter of the observations (initiatives) per year. counter starts at 0#
-data <- do.call(rbind, by(data, data$year, function(dd) cbind(dd, n = as.numeric(0:(nrow(dd)-1)))))#
-rownames(data) <- NULL#
-#
-# change the names of the data.frame to be highcharts friendly#
-colnames(data) <- c('date', 'name', 'value', 'x', 'y')#
-### PLOT#
-a <- Highcharts$new()#
-# use type='heatmap' for heat maps#
-a$chart(zoomType = "xy", type = 'heatmap', width = 1000)#
-# Pass the data.#
-a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
-# Define the color scale#
-a$addParams(colorAxis =#
-  list(min = 0, max = 100, stops = list(#
-	  list(0, '#ab3d3f'),#
-      list(0.499, '#EED8D9'),#
-      list(0.5, '#ADC2C2'),#
-      list(1, '#336666')#
-  ))#
-)#
-a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
-	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
-#
-# a$addAssets(js =#
-#    c("https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js",#
-#      "https://code.highcharts.com/highcharts.js",#
-#      "https://code.highcharts.com/highcharts-more.js",#
-#      "https://code.highcharts.com/modules/exporting.js",#
-#      "https://code.highcharts.com/modules/heatmap.js"#
-#      )#
-# )#
-a
-setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
-library(rCharts)#
-#
-### CREDITS#
-# http://stefan-wilhelm.net/interactive-highcharts-heat-maps-in-r-with-rcharts/#
-#
-### Load the data file#
-data <- read.csv("citizenIniatives_ch.csv", stringsAsFactors = F)#
-#
-### Aggregate the data by year#
-data$year <- as.numeric(substr(data$date,1, 4))#
-#
-# add counter of the observations (initiatives) per year. counter starts at 0#
-data <- do.call(rbind, by(data, data$year, function(dd) cbind(dd, n = as.numeric(0:(nrow(dd)-1)))))#
-rownames(data) <- NULL#
-#
-# change the names of the data.frame to be highcharts friendly#
-colnames(data) <- c('date', 'name', 'value', 'x', 'y')#
-### PLOT#
-a <- Highcharts$new()#
-# use type='heatmap' for heat maps#
-a$chart(zoomType = "xy", type = 'heatmap', width = 1000)#
-# Pass the data.#
-a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
-# Define the color scale#
-a$addParams(colorAxis =#
-  list(min = 0, max = 100, stops = list(#
-	  list(0, '#ab3d3f'),#
-      list(0.499, '#EED8D9'),#
-      list(0.5, '#ADC2C2'),#
-      list(1, '#336666')#
-  ))#
-)#
-a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
-	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
-#
-a$addAssets(js =#
-   c("https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js",#
-     "https://code.highcharts.com/highcharts-more.js",#
-     "https://code.highcharts.com/modules/heatmap.js"#
-     )#
-)#
-a
-setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
-library(rCharts)#
-#
-### CREDITS#
-# http://stefan-wilhelm.net/interactive-highcharts-heat-maps-in-r-with-rcharts/#
-#
-### Load the data file#
-data <- read.csv("citizenIniatives_ch.csv", stringsAsFactors = F)#
-#
-### Aggregate the data by year#
-data$year <- as.numeric(substr(data$date,1, 4))#
-#
-# add counter of the observations (initiatives) per year. counter starts at 0#
-data <- do.call(rbind, by(data, data$year, function(dd) cbind(dd, n = as.numeric(0:(nrow(dd)-1)))))#
-rownames(data) <- NULL#
-#
-# change the names of the data.frame to be highcharts friendly#
-colnames(data) <- c('date', 'name', 'value', 'x', 'y')#
-### PLOT#
-a <- Highcharts$new()#
-# use type='heatmap' for heat maps#
-a$chart(zoomType = "xy", type = 'heatmap', width = 1000)#
-# Pass the data.#
-a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
-# Define the color scale#
-a$addParams(colorAxis =#
-  list(min = 0, max = 100, stops = list(#
-	  list(0, '#ab3d3f'),#
-      list(0.499, '#EED8D9'),#
-      list(0.5, '#ADC2C2'),#
-      list(1, '#336666')#
-  ))#
-)#
-a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
-	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
-#
-a$addAssets(js =#
-   c(#
-	# "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js",#
-    # "https://code.highcharts.com/highcharts-more.js",#
-     "https://code.highcharts.com/modules/heatmap.js"#
-     )#
-)#
-a
-setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
-library(rCharts)#
-#
-### CREDITS#
-# http://stefan-wilhelm.net/interactive-highcharts-heat-maps-in-r-with-rcharts/#
-#
-### Load the data file#
-data <- read.csv("citizenIniatives_ch.csv", stringsAsFactors = F)#
-#
-### Aggregate the data by year#
-data$year <- as.numeric(substr(data$date,1, 4))#
-#
-# add counter of the observations (initiatives) per year. counter starts at 0#
-data <- do.call(rbind, by(data, data$year, function(dd) cbind(dd, n = as.numeric(0:(nrow(dd)-1)))))#
-rownames(data) <- NULL#
-#
-# change the names of the data.frame to be highcharts friendly#
-colnames(data) <- c('date', 'name', 'value', 'x', 'y')#
-### PLOT#
-a <- Highcharts$new()#
-# use type='heatmap' for heat maps#
-a$chart(zoomType = "xy", type = 'heatmap', width = 1000)#
-# Pass the data.#
-a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
-# Define the color scale#
-a$addParams(colorAxis =#
-  list(min = 0, max = 100, stops = list(#
-	  list(0, '#ab3d3f'),#
-      list(0.499, '#EED8D9'),#
-      list(0.5, '#ADC2C2'),#
-      list(1, '#336666')#
-  ))#
-)#
+a$addParams(colorAxis = list(min = 0, max = 100, stops = list(list(0, '#ab3d3f'), list(0.499, '#EED8D9'),list(0.5, '#ADC2C2'),list(1, '#336666'))))#
 a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
 	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
 #
 a$addAssets(js = c("https://code.highcharts.com/modules/heatmap.js"))#
 a
-data$date
-str(data$date)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+install.packages("devtools")#
+require(devtools)#
+install_github('rCharts', 'ramnathv')#
+library(rCharts)#
+#
+# Load the data file#
+data <- read.csv("citizenIniatives_ch.csv", stringsAsFactors = F)#
+#
+# Get only the year from each date (not an elegant solution here, better to use date)#
+data$year <- as.numeric(substr(data$date,1, 4))#
+#
+# add the count of observations (votes) per year. The count starts at 0 each year#
+data <- do.call(rbind, by(data, data$year, function(dd) cbind(dd, n = as.numeric(0:(nrow(dd)-1)))))#
+rownames(data) <- NULL#
+#
+# change the names of the data.frame to be highcharts-friendly#
+colnames(data) <- c('date', 'name', 'value', 'x', 'y')#
+#
+### PLOT#
+a <- Highcharts$new()#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
+a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
+#
+# Define the color scale#
+a$addParams(colorAxis = list(min = 0, max = 100, stops = list(list(0, '#ab3d3f'), list(0.499, '#EED8D9'),list(0.5, '#ADC2C2'),list(1, '#336666'))))#
+a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
+	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
+#
+a$addAssets(js = c("https://code.highcharts.com/modules/heatmap.js"))#
+a
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+data <- read.csv("citizenIniatives_ch.csv", stringsAsFactors = F)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+data <- read.csv("citizenInitiatives_ch.csv", stringsAsFactors = F)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+# Load the data file#
+data <- read.csv("citizenInitiatives_ch.csv", stringsAsFactors = F)#
+#
+# Get only the year from each date (not an elegant solution here, better to use date)#
+data$year <- as.numeric(substr(data$date,1, 4))#
+#
+# add the count of observations (votes) per year. The count starts at 0 each year#
+data <- do.call(rbind, by(data, data$year, function(dd) cbind(dd, n = as.numeric(0:(nrow(dd)-1)))))#
+rownames(data) <- NULL
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+# change the names of the data.frame to be highcharts-friendly#
+colnames(data) <- c('date', 'name', 'value', 'x', 'y')#
+#
+### PLOT#
+a <- Highcharts$new()#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
+a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
+#
+# Define the color scale#
+a$addParams(colorAxis = list(min = 0, max = 100, stops = list(list(0, '#ab3d3f'), list(0.499, '#EED8D9'),list(0.5, '#ADC2C2'),list(1, '#336666'))))#
+a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
+	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
+#
+a$addAssets(js = c("https://code.highcharts.com/modules/heatmap.js"))#
+a
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+a <- Highcharts$new()#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
+a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))
+a
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+a <- Highcharts$new()#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
+a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
+#
+# Define the color scale#
+# a$addParams(colorAxis = list(min = 0, max = 100, stops = list(list(0, '#ab3d3f'), list(0.499, '#EED8D9'),list(0.5, '#ADC2C2'),list(1, '#336666'))))#
+# a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
+# 	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
+#
+a$addAssets(js = c("https://code.highcharts.com/modules/heatmap.js"))
+a
+a
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+install.packages("devtools")#
+require(devtools)#
+install_github('rCharts', 'ramnathv')#
+library(rCharts)#
+#
+# Load the data file#
+data <- read.csv("citizenInitiatives_ch.csv", stringsAsFactors = F)#
+#
+# Get only the year from each date (not an elegant solution here, better to use date)#
+data$year <- as.numeric(substr(data$date,1, 4))#
+#
+# add the count of observations (votes) per year. The count starts at 0 each year#
+data <- do.call(rbind, by(data, data$year, function(dd) cbind(dd, n = as.numeric(0:(nrow(dd)-1)))))#
+rownames(data) <- NULL#
+#
+# change the names of the data.frame to be highcharts-friendly#
+colnames(data) <- c('date', 'name', 'value', 'x', 'y')#
+#
+### PLOT#
+a <- Highcharts$new()#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
+a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
+#
+# Define the color scale#
+a$addParams(colorAxis = list(min = 0, max = 100, stops = list(list(0, '#ab3d3f'), #
+	list(0.499, '#EED8D9'),list(0.5, '#ADC2C2'),list(1, '#336666'))))#
+a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
+	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
+#
+a$addAssets(js = c("https://code.highcharts.com/modules/heatmap.js"))#
+a
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+a <- Highcharts$new()#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
+a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
+#
+# Define the color scale#
+a$addParams(colorAxis = list(min = 0, max = 100, stops = list(list(0, '#ab3d3f'), #
+	list(0.499, '#EED8D9'),list(0.5, '#ADC2C2'),list(1, '#336666'))))#
+a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
+	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
+#
+a$addAssets(js = c("https://code.highcharts.com/modules/heatmap.js"))#
+a#
+# Define the tooltip to show the 'name' of each data point#
+formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + this.point.x + ',</b> the initative:<br><i>' +#
+	this.point.name + '</i>gathered <b>' + this.point.value + '%</b> of yes</div>'; } !#"#
+a$tooltip(formatter = formatter, useHTML = T, borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)')#
+a
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+a <- Highcharts$new()#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
+a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
+#
+# Define the color scale#
+a$addParams(colorAxis = list(min = 0, max = 100, stops = list(list(0, '#ab3d3f'), #
+	list(0.499, '#EED8D9'),list(0.5, '#ADC2C2'),list(1, '#336666'))))#
+a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
+	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
+#
+a$addAssets(js = c("https://code.highcharts.com/modules/heatmap.js"))#
+a#
+# Define the tooltip to show the 'name' of each data point#
+# formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + this.point.x + ',</b> the initative:<br><i>' +#
+# 	this.point.name + '</i>gathered <b>' + this.point.value + '%</b> of yes</div>'; } !#"#
+formatter <- "#! function() { return 'In <b>' + this.point.x + ',</b> the initative:<br><i>' +#
+	this.point.name + '</i> gathered <b>' + this.point.value + '%</b> of yes</div>'; } !#"#
+a$tooltip(formatter = formatter, useHTML = T, borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)')#
+a
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+a <- Highcharts$new()#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
+a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
+#
+# Define the color scale#
+a$addParams(colorAxis = list(min = 0, max = 100, stops = list(list(0, '#ab3d3f'), #
+	list(0.499, '#EED8D9'),list(0.5, '#ADC2C2'),list(1, '#336666'))))#
+a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
+	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
+#
+a$addAssets(js = c("https://code.highcharts.com/modules/heatmap.js"))#
+a#
+# Define the tooltip to show the 'name' of each data point#
+# formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + this.point.x + ',</b> the initative:<br><i>' +#
+# 	this.point.name + '</i>gathered <b>' + this.point.value + '%</b> of yes</div>'; } !#"#
+formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + #
+	this.point.x + ',</b> the initative:<br><i>' + this.point.name + '</i>gathered <b>' + this.point.value + '%</b> of yes</div>'; } !#"#
+a$tooltip(formatter = formatter, useHTML = T, borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)')#
+a
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+a <- Highcharts$new()#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
+a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
+#
+# Define the color scale#
+a$addParams(colorAxis = list(min = 0, max = 100, stops = list(list(0, '#ab3d3f'), #
+	list(0.499, '#EED8D9'),list(0.5, '#ADC2C2'),list(1, '#336666'))))#
+a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
+	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
+#
+a$addAssets(js = c("https://code.highcharts.com/modules/heatmap.js"))#
+a#
+# Define the tooltip to show the 'name' of each data point#
+# formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + this.point.x + ',</b> the initative:<br><i>' +#
+# 	this.point.name + '</i>gathered <b>' + this.point.value + '%</b> of yes</div>'; } !#"#
+formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + #
+	this.point.x + ',</b> the initative:<br><i>' + this.point.name + '<br></i>gathered <b>' + this.point.value + '%</b> of yes</div>'; } !#"#
+a$tooltip(formatter = formatter, useHTML = T, borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)')#
+a
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+a <- Highcharts$new()#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
+a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
+#
+# Define the color scale#
+a$addParams(colorAxis = list(min = 0, max = 100, stops = list(list(0, '#ab3d3f'), #
+	list(0.499, '#EED8D9'),list(0.5, '#ADC2C2'),list(1, '#336666'))))#
+a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
+	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
+#
+a$addAssets(js = c("https://code.highcharts.com/modules/heatmap.js"))#
+a#
+# Define the tooltip to show the 'name' of each data point#
+# formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + this.point.x + ',</b> the initative:<br><i>' +#
+# 	this.point.name + '</i>gathered <b>' + this.point.value + '%</b> of yes</div>'; } !#"#
+formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + #
+	this.point.x + ',</b> the initative:<br><br><i>' + this.point.name + '<br><br></i>gathered <b>' + this.point.value + '%</b> of yes</div>'; } !#"#
+a$tooltip(formatter = formatter, useHTML = T, borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)')#
+a
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+a <- Highcharts$new()#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
+a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
+#
+# Define the color scale#
+a$addParams(colorAxis = list(min = 0, max = 100, stops = list(list(0, '#ab3d3f'), #
+	list(0.499, '#EED8D9'),list(0.5, '#ADC2C2'),list(1, '#336666'))))#
+a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
+	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
+#
+a$addAssets(js = c("https://code.highcharts.com/modules/heatmap.js"))#
+a#
+# Define the tooltip to show the 'name' of each data point#
+# formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + this.point.x + ',</b> the initative:<br><i>' +#
+# 	this.point.name + '</i>gathered <b>' + this.point.value + '%</b> yes</div>'; } !#"#
+formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + #
+	this.point.x + ',</b> the initative:<br><br><i>' + this.point.name + '<br><br></i>gathered <b>' + this.point.value + '%</b> of yes</div>'; } !#"#
+a$tooltip(formatter = formatter, useHTML = T, borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)')#
+a
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD/openGithub')
+a <- Highcharts$new()#
+a$chart(zoomType = "x", type = 'heatmap', width = 1000)#
+# Pass the data as JSON#
+a$series(name = "", data =  rCharts::toJSONArray2(data, json = F, names = T))#
+#
+# Define the color scale#
+a$addParams(colorAxis = list(min = 0, max = 100, stops = list(list(0, '#ab3d3f'), #
+	list(0.499, '#EED8D9'),list(0.5, '#ADC2C2'),list(1, '#336666'))))#
+a$yAxis(lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),#
+	labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0)#
+#
+a$addAssets(js = c("https://code.highcharts.com/modules/heatmap.js"))#
+a#
+# Define the tooltip to show the 'name' of each data point#
+# formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + this.point.x + ',</b> the initative:<br><i>' +#
+# 	this.point.name + '</i>gathered <b>' + this.point.value + '%</b> yes</div>'; } !#"#
+formatter <- "#! function() { return '<div class=\"tooltip\" style=\"color:#686868;font-size:0.8em\">In <b>' + #
+	this.point.x + ',</b> the initative:<br><br><i>' + this.point.name + '<br><br></i>gathered <b>' + this.point.value + '%</b> yes</div>'; } !#"#
+a$tooltip(formatter = formatter, useHTML = T, borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)')#
+a

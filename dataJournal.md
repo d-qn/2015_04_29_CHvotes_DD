@@ -11,5 +11,37 @@
  
  * Import into Google drive: [allCH_ballots](https://docs.google.com/a/swissinfo.ch/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit#gid=953666393)
  
- * 
+ 
+ 
+## Create the interactive infographics
+
+#### Download the data
+
+* Download that file as CSV: [data file (c2d.ch)](https://docs.google.com/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit#gid=953666393)
+* Put that file (_allCH_ballots - VOTES_allCH.csv_) into the folder **data**
+* Run the script: _01_processCSVfromGsheet.R_
+* This will create another csv file with an additional column _type_: type of vote (initiative, mandatory or facultative referendum)
+
+
+* Download the microcopy file as **TSV** [data file (c2d.ch)](https://docs.google.com/spreadsheets/d/1c4XQLIP9FiKWAPkKZ6IGq5LDStQXymAd7t6_GpqvoMo/edit#gid=953666393) (**second sheet**)
+
+
+##### Generate the graphics
+
+Run the script: _02_allCHvotes_heatmap_tableTooltip.R_
+
+##### Arabic 
+
+* Modify the first HTML tag to:
+```
+<html dir="rtl">
+```
+
+
+
+
+
+
+
+
  
