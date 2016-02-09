@@ -1,6 +1,6 @@
 code	eng	ger	fre	ita	spa	por	jpn	chi	rus	ara
 tp.yes	Yes	Ja	Oui	Sì	Sí	Sim	賛成	赞成	Да	نعم
-tp.turnout	Turnout	Wahlbeteiligung	Participation	Partecipazione	Participación	Participação	投票率	参与率	Участие	نسبة المشاركة
+tp.turnout	Turnout	Stimmbeteiligung	Participation	Partecipazione	Participación	Participação	投票率	参与率	Участие	نسبة المشاركة
 tp.accepted	Accepted	angenommen	accepté	accettato	aceptado	aprovado	可決	通过	Одобрено	تمت الموافقة عليه
 tp.refused	Rejected	abgelehnt	rejeté	respinto	rechazado	rejeitado	否決	否决	Отклонено	تم رفضه
 title.initiative	People's initiatives	Volksinitiativen	Initiatives populaires	Iniziative popolari	Iniciativas populares	Iniciativas populares	イニシアチブ（国民発議）	公民动议	Народная законодательная инициатива	مبادرات شعبية

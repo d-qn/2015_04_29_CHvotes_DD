@@ -1,94 +1,3 @@
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) + theme_minimal()
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) + #
-theme_minimal() + theme(legend.position = "none")
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_null())
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank())
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank())
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank())
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(), axis.text = element_blank())
-path.ch <- getPathShp('CH')
-path.ch
-getShpLayers(path.ch)
-ch <- readOGR(path.ch, layer = 'municipalities')
-ch.df <- formatShp(ch)
-str(ch.df)
-ggplot(ch.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = GEMNAME)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(), axis.text = element_blank())
-lake <- readOGR(path.ch, layer = "lakes")#
-country <- readOGR(path.ch, layer = "country")
-lake.df <- formatShp(readOGR(path.ch, layer = "lakes"))#
-country.df <- formatShp(readOGR(path.ch, layer = "country"))
-alpha
-lake.df <- formatShp(readOGR(path.ch, layer = "lakes"))#
-country.df <- formatShp(readOGR(path.ch, layer = "country"))#
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + #
-  geom_polygon(data = lake.df, fill = alpha("lightgrey", alpha = 1), colour = alpha("lightgrey", alpha = 1))
-ch.communes <- ggplot(ch.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = GEMNAME)) + #
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(), axis.text = element_blank())#
-ch.communes
-lake.df <- formatShp(readOGR(path.ch, layer = "lakes"))#
-country.df <- formatShp(readOGR(path.ch, layer = "country"))#
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + #
-  geom_polygon(data = lake.df, fill = alpha("lightgrey", alpha = 1), colour = alpha("lightgrey", alpha = 1))
-?alpha
-library(swiMap)
-?getShpLayers
-require(rgdal)#
-require(rgeos)#
-require(ggplot2)#
-path <- getPathShp('world')#
-layers <- getShpLayers(path)#
-# read shapefiles for given layer#
-world <- readOGR(path, layer = layers[1])#
-world.df <- formatShp(world)#
-# plot world map#
-ggplot(world.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = FIPS)) +#
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(), axis.text = element_blank())#
-Same with swiss commune map (slow!)#
-## Not run: #
-path.ch <- getPathShp('CH')#
-ch <- readOGR(path.ch, layer = 'municipalities')#
-ch.df <- formatShp(ch)#
-# plot swiss commune map#
-ch.communes <- ggplot(ch.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = GEMNAME)) +#
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(), axis.text = element_blank())#
-ch.communes
-lake.df <- formatShp(readOGR(path.ch, layer = "lakes"))#
-country.df <- formatShp(readOGR(path.ch, layer = "country"))
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + geom_polygon(data = lake.df, fill = alpha("lightgrey", alpha = 1), colour = alpha("lightgrey", alpha = 1))
-library(scales)
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + geom_polygon(data = lake.df, fill = alpha("lightgrey", alpha = 1), colour = alpha("lightgrey", alpha = 1))
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 0.15) + geom_polygon(data = lake.df, fill = "lightgrey", colour = "lightgrey")
-ch.communes + geom_polygon(data = country.df, fill = NA, size = 1) + geom_polygon(data = lake.df, fill = "lightgrey", colour = "lightgrey")
-str(country.df)
-library(swiMap)
-?getShpLayers
-require(rgdal)#
-require(rgeos)#
-require(ggplot2)
-path.ch <- getPathShp('CH')#
-ch <- readOGR(path.ch, layer = 'municipalities')#
-ch.df <- formatShp(ch)#
-# plot swiss commune map#
-ch.communes <- ggplot(ch.df, aes(x = long, y = lat, group = group)) + geom_polygon(size = 0.01, aes(fill = GEMNAME)) +#
-theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.ticks = element_blank(), axis.title = element_blank(), axis.text = element_blank())#
-ch.communes#
-# add the lake and country contours#
-lake.df <- formatShp(readOGR(path.ch, layer = "lakes"))#
-country.df <- formatShp(readOGR(path.ch, layer = "country"))#
-ch.communes + geom_polygon(data = country.df, fill = NA, color = "black", size = 2) + geom_polygon(data = lake.df, fill = "lightgrey", colour = "lightgrey")
-ch.communes + geom_polygon(data = lake.df, fill = "lightgrey", colour = "lightgrey")
-str(country.df)
-geom_polygon(data = country.df, fill = NA, color = "black", size = 2)
-ggplot() + geom_polygon(data = country.df, fill = NA, color = "black", size = 2)
-ggplot(aes(lon, lat)) + geom_polygon(data = country.df, fill = NA, color = "black", size = 2)
-ggplot(aes(x = long, y = lat, group = group)) +  geom_polygon(data = country.df, fill = NA, color = "black", size = 2)
-str(country.df)
 ggplot(data = country.df,aes(x = long, y = lat, group = group)) +  geom_polygon( fill = NA, color = "black", size = 2)
 ch.communes + geom_polygon(data = lake.df, fill = "lightgrey", colour = "lightgrey") + geom_polygon(data = country.df, fill = NA, color = "black", size = 2)
 str(ch.df)
@@ -514,51 +423,8 @@ require(devtools)#
 install_github('rCharts', 'ramnathv')#
 library(rCharts)
 install_github(ramnathv/rCharts)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
-#############################################################################################
-###		SETTINGS#
-#############################################################################################
-#
-#### 1. From the google spreadsheet, download as csv!#
-votefile <- "data/allCH_ballots - VOTES_allCH.csv"#
-#
-#############################################################################################
-###		load initiative data#
-#############################################################################################
-votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)#
-# reverse order#
-votes.read <- votes.read[rev(as.numeric(rownames(votes.read))),]#
-#
-#### 2. Create new column with vote type (3 types)#
-### the different vote types#
-# referendum obligatoire, referendum facultatif, initiative populaire, contre-projet de l'assemblée fédérale, see http://www.bfs.admin.ch/bfs/portal/fr/index/themen/17/03/blank/key/eidg__volksinitiativen.html#
-# unique(votes.read$Institutions)#
-#
-type <- rep('', nrow(votes.read))#
-idx.subset <- grep('^Initiative',votes.read$Institutions, ignore.case = F)#
-type[idx.subset] <- 'initiative'#
-idx.subset <- grep('(Constitutional|Mandatory).*(Referendum|Initiative)', votes.read$Institutions, ignore.case = T)#
-stopifnot(all(type[idx.subset] == ""))#
-type[idx.subset] <- 'mandatory Referendum'#
-idx.subset <- grep('Optional.*referendum',votes.read$Institutions, ignore.case = T)#
-stopifnot(all(type[idx.subset] == ""))#
-type[idx.subset] <- 'facultative Referendum'#
-if(any(type == "")) {#
-	votes.read[which(type == ""),]#
-	stop("some vote types are not defined !!!!!!!!!")#
-}#
-votes.read$type <- as.factor(type)#
-table(votes.read$type)#
-browseURL("http://www.bfs.admin.ch/bfs/portal/fr/index/themen/17/03/blank/key/eidg__volksinitiativen.html")#
-#
-### 3. Check the result / vote outcome#
-idx <- which(!votes.read$Result %in% c("yes", "no"))#
-if(length(idx) > 0) {#
-	warning("\nThose vote IDs have no result status: ", paste(votes.read[idx,1], collapse = ", "))#
-}#
-#
-###
-write.csv(votes.read, file = gsub("\\.csv", paste0("_", Sys.Date(), ".csv"), votefile))
+1:2
+rev(1:2)
 setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
 library("swiTheme")#
 library("swiRcharts")#
@@ -568,16 +434,18 @@ library("dplyr")#
 ###		SETTINGS#
 #############################################################################################
 #
+subsetLang <- NULL#
+#
 # download the raw file without footer!!!#
-votefile <- "data/allCH_ballots - VOTES_allCH_2015-06-08.csv"#
+votefile <- "data/allCH_ballots - VOTES_allCH_2015-06-14.csv"#
 votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)#
 #
-trad <- read.csv("data/allCH_ballots - translations.tsv", sep ="\t", row.names = 1, stringsAsFactors = F)#
+trad <- read.csv("data/allCHVotes_byYes.tsv", sep ="\t", row.names = 1, stringsAsFactors = F)#
 #
 votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)#
 # PLOT SETTINGS#
-plot.height <- 520#
-outputDir <- "graphics"#
+plot.height <- 450#
+outputDir <- "graphics_yes"#
 #
 if(!file.exists(outputDir)) {#
 	dir.create(outputDir)#
@@ -592,10 +460,122 @@ votes.read$type <- as.factor(votes.read$type)#
 ## transform date to date#
 votes.read$date <- as.Date(votes.read$`Date of Votes`, format = "%d/%m/%Y")#
 #
-## add year#
-votes.read$year <- as.numeric(substr(votes.read$date,1, 4))#
+votes.read$diffYesNo <- votes.read$`Yes Votes` - votes.read$`No Votes`#
+### hack to replace result unknown with yes!!#
+votes.read[which(votes.read$Result == ''), 'Result'] <- 'yes'#
+votesYes <- votes.read %>% filter(Result == "yes")#
+votesYes[which(rank(votesYes$diffYesNo) <= 4),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+library("swiTheme")#
+library("swiRcharts")#
+library("dplyr")#
 #
-## add counter of ballot type per year#
-votes.read <- do.call(rbind, by(votes.read, list(votes.read$year, votes.read$type), function(ii) {#
-	cbind(ii, n = as.numeric(0:(nrow(ii)-1)))#
-}))
+#############################################################################################
+###		SETTINGS#
+#############################################################################################
+#
+subsetLang <- NULL#
+#
+# download the raw file without footer!!!#
+votefile <- "data/allCH_ballots - VOTES_allCH_2015-06-14.csv"#
+votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)#
+#
+trad <- read.csv("data/allCHVotes_byYes.tsv", sep ="\t", row.names = 1, stringsAsFactors = F)#
+#
+votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)#
+# PLOT SETTINGS#
+plot.height <- 450#
+outputDir <- "graphics_yes"#
+#
+if(!file.exists(outputDir)) {#
+	dir.create(outputDir)#
+}#
+#
+#############################################################################################
+###		load ballot data#
+#############################################################################################
+#
+votes.read$type <- as.factor(votes.read$type)#
+#
+## transform date to date#
+votes.read$date <- as.Date(votes.read$`Date of Votes`, format = "%d/%m/%Y")#
+#
+votes.read$diffYesNo <- votes.read$`Yes Votes` - votes.read$`No Votes`#
+### hack to replace result unknown with yes!!#
+votes.read[which(votes.read$Result == ''), 'Result'] <- 'yes'#
+votesYes <- votes.read %>% filter(Result == "yes")#
+votesYes[which(rank(votesYes$diffYesNo) <= 4),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votesNo <- votes.read %>% filter(Result == "no")#
+votesNo[which(rank(votesNo$diffYesNo) <= 4),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+rank(votesNo$diffYesNo
+)
+nrow(votesNo)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votesNo <- votes.read %>% filter(Result == "no")#
+votesNo[which(rank(votesNo$diffYesNo) >= nrow(votesNo) - 4),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votes.read$type <- as.factor(votes.read$type)#
+#
+## transform date to date#
+votes.read$date <- as.Date(votes.read$`Date of Votes`, format = "%d/%m/%Y")#
+#
+votes.read$diffYesNo <- votes.read$`Yes Votes` - votes.read$`No Votes`#
+### hack to replace result unknown with yes!!#
+votes.read[which(votes.read$Result == ''), 'Result'] <- 'yes'#
+votesYes <- votes.read %>% filter(Result == "yes")#
+votesYes[which(rank(votesYes$diffYesNo) <= 4),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+nrow(votesNo) - 4)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votesNo[which(rank(votesNo$diffYesNo) >= nrow(votesNo) - 4),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+order(votesNo$diffYesNo)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+order(votesNo$diffYesNo, decreasing = T)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votesNo[,which(order(votesNo$diffYesNo, decreasing = T)  <= 4,]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votesNo <- votes.read %>% filter(Result == "no")#
+votesNo[,which(order(votesNo$diffYesNo, decreasing = T)  <= 4,]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votesNo[which(order(votesNo$diffYesNo, decreasing = T)  <= 4,]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votesNo[which(order(votesNo$diffYesNo, decreasing = T)  <= 4),]
+min(votesNo$diffYesNo)
+max(votesNo$diffYesNo)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votesNo <- votes.read %>% filter(Result == "no")#
+votesNo[which(rank(abs(votesNo$diffYesNo)) <= 4),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votesYes <- votes.read %>% filter(Result == "yes")#
+votesYes[which(rank(votesYes$diffYesNo) <= 4),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votesYes <- votes.read %>% filter(Result == "yes")#
+votesYes[which(rank(votesYes$diffYesNo) <= 2),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votesNo <- votes.read %>% filter(Result == "no")#
+votesNo[which(rank(abs(votesNo$diffYesNo)) <= 2),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votesYes <- votes.read %>% filter(Result == "yes")#
+votesYes[which(rank(votesYes$diffYesNo) <= 2),]#
+#
+votesNo <- votes.read %>% filter(Result == "no")#
+votesNo[which(rank(abs(votesNo$diffYesNo)) <= 2),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2015_04_29_CHvotes_DD')
+votes.read$type <- as.factor(votes.read$type)#
+#
+## transform date to date#
+votes.read$date <- as.Date(votes.read$`Date of Votes`, format = "%d/%m/%Y")#
+#
+votes.read$diffYesNo <- votes.read$`Yes Votes` - votes.read$`No Votes`#
+### hack to replace result unknown with yes!!#
+votes.read[which(votes.read$Result == ''), 'Result'] <- 'yes'#
+#
+cols <- c('fre', 'date', 'type')#
+votesYes <- votes.read %>% filter(Result == "yes")#
+votesYes[which(rank(votesYes$diffYesNo) <= 2),cols]#
+#
+votesNo <- votes.read %>% filter(Result == "no")#
+votesNo[which(rank(abs(votesNo$diffYesNo)) <= 2),cols]

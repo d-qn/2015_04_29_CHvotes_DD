@@ -6,6 +6,7 @@ library("dplyr")
 ###		SETTINGS
 ############################################################################################
 
+
 subsetLang <- NULL
 
 # download the raw file without footer!!!
@@ -136,6 +137,7 @@ for(votetype in levels(votes.read$type)) {
 						ifelse(data$result == "no", trad["tp.refused",lang], trad["tp.accepted",lang]), '</td></tr>',
 				'</table></div>')
 		}
+
 
 		## Heatmap column chart
 		a <- Highcharts$new()
