@@ -1,4 +1,4 @@
-# Data for all Swiss national votes
+## Data for all Swiss national votes
 
 ### From C2D.ch
 
@@ -30,9 +30,9 @@
 
 Run the script: _02_allCHvotes_heatmap_tableTooltip.R_
 
-##### Arabic 
+## Arabic 
 
-* Modify the first HTML tag to:
+* **Modify the first HTML tag to**
 ```
 <html dir="rtl">
 ```

@@ -9,7 +9,7 @@ library("dplyr")
 subsetLang <- NULL
 
 # download the raw file without footer!!!
-votefile <- "data/allCH_ballots - VOTES_allCH_2015-06-17.csv"
+votefile <- "data/allCH_ballots - VOTES_allCH_2016-03-01.csv"
 votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)
 
 trad <- read.csv("data/allCH_ballots - translations.tsv", sep ="\t", row.names = 1, stringsAsFactors = F)
@@ -51,7 +51,7 @@ votetype <- levels(votes.read$type)[2]
 lang <- colnames(trad)[1]
 
 ## SUBSET DATA if subsetLang is defined
-if(is.null(subsetLang) || length(subsetLang) > 0) {
+if(!is.null(subsetLang) && length(subsetLang) > 0) {
 	trad <- select(trad, one_of(subsetLang))
 }
 
