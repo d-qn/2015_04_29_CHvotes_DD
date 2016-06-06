@@ -9,7 +9,7 @@ library("dplyr")
 subsetLang <- NULL
 
 # download the raw file without footer!!!
-votefile <- "data/allCH_ballots - VOTES_allCH_2016-03-01.csv"
+votefile <- "data/allCH_ballots - VOTES_allCH_2016-06-05.csv"
 votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)
 
 trad <- read.csv("data/allCH_ballots - translations.tsv", sep ="\t", row.names = 1, stringsAsFactors = F)
