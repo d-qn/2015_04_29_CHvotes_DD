@@ -1,5 +1,6 @@
 library("swiTheme")
 library("swiRcharts")
+library("rCharts")
 library("dplyr")
 
 ############################################################################################
@@ -9,7 +10,7 @@ library("dplyr")
 subsetLang <- NULL
 
 # download the raw file without footer!!!
-votefile <- "data/allCH_ballots - VOTES_allCH_2016-06-05.csv"
+votefile <- "data/allCH_ballots - VOTES_allCH_2017-03-06.csv"
 votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)
 
 trad <- read.csv("data/allCH_ballots - translations.tsv", sep ="\t", row.names = 1, stringsAsFactors = F)
