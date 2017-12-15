@@ -99,8 +99,8 @@ for(votetype in levels(votes.read$type)) {
 			color1 <- '#333366'
 		}
 		if(typeShort == 'mandatoryReferendum') {
-			color0.5 <- '#ddeeee'
-			color1 <- '#224444'
+			color0.5 <- '#eeeedd'
+			color1 <- ' #444422'
 			subtitle.align <- "right"
 			subtitle.x <- -5
 			resetZoomButton.align <- "left"
@@ -161,16 +161,13 @@ for(votetype in levels(votes.read$type)) {
 		  )) %>%
 		hc_add_theme(hc_theme_swi) %>%
     hc_legend(align='center',layout='horizontal', margin=-42, y = 50, verticalAlign='top',symbolWidth = 100,symbolHeight=7) %>%
-		hc_xAxis(min = min(data$x), max = max(data$x), ceiling = max(data$x), maxPadding = 0,  title = list(text = "")) %>%
+		hc_xAxis(min = min(data$x), max = max(data$x), ceiling = max(data$x), maxPadding = 0,  title = list(text = ""), 
+		         lineColor = "#7D8279", tickWidth = 1.5, tickLength = 7, tickColor = "#7D8279") %>%
 		hc_yAxis(min = min(data$y), max = max(data$y),
 			maxPadding = 0, lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),
 			labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0) %>%
 		hc_tooltip(formatter = JS("function() { return this.point.name; }"), useHTML = T,
 			borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)', style = list(padding = 3))
-
-		# addhtmlbreak <- function(text) {
-		# 	gsub('(.{1,35})(\\s|$)', '\\1\\<br\\>', text)
-		# }
 
 		yRange <- paste(range(data$x), collapse = "-")
 

@@ -183,8 +183,8 @@ if(!is.null(subsetLang) &amp;&amp; length(subsetLang) &gt; 0) {
             color1 &lt;- '#333366'
         }
         if(typeShort == 'mandatoryReferendum') {
-            color0.5 &lt;- '#ddeeee'
-            color1 &lt;- '#224444'
+            color0.5 &lt;- '#eeeedd'
+            color1 &lt;- ' #444422'
             subtitle.align &lt;- &quot;right&quot;
             subtitle.x &lt;- -5
             resetZoomButton.align &lt;- &quot;left&quot;
@@ -245,16 +245,13 @@ if(!is.null(subsetLang) &amp;&amp; length(subsetLang) &gt; 0) {
           )) %&gt;%
         hc_add_theme(hc_theme_swi) %&gt;%
     hc_legend(align='center',layout='horizontal', margin=-42, y = 50, verticalAlign='top',symbolWidth = 100,symbolHeight=7) %&gt;%
-        hc_xAxis(min = min(data$x), max = max(data$x), ceiling = max(data$x), maxPadding = 0,  title = list(text = &quot;&quot;)) %&gt;%
+        hc_xAxis(min = min(data$x), max = max(data$x), ceiling = max(data$x), maxPadding = 0,  title = list(text = &quot;&quot;), 
+                 lineColor = &quot;#7D8279&quot;, tickWidth = 1.5, tickLength = 7, tickColor = &quot;#7D8279&quot;) %&gt;%
         hc_yAxis(min = min(data$y), max = max(data$y),
             maxPadding = 0, lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = &quot;&quot;),
             labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0) %&gt;%
         hc_tooltip(formatter = JS(&quot;function() { return this.point.name; }&quot;), useHTML = T,
             borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)', style = list(padding = 3))
-
-        # addhtmlbreak &lt;- function(text) {
-        #   gsub('(.{1,35})(\\s|$)', '\\1\\&lt;br\\&gt;', text)
-        # }
 
         yRange &lt;- paste(range(data$x), collapse = &quot;-&quot;)
 
