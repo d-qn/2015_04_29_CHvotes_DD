@@ -19,7 +19,6 @@ library("swiRcharts")
 library("highcharter")
 library("htmltools")
 
-
 bg.colour <-  "#f7f5ed"
 subsetLang <- NULL
 # download the raw file without footer!!!
@@ -198,7 +197,7 @@ for(votetype in levels(votes.read$type)) {
 
 ```{r move production graphics}
 if (cleanOutput) {
-  files <- c("basename_.*html", "js")
+  files <- c(".*(initiative|Referendum)_.*html", "js")
 
   if (!dir.exists("output/bak")) {
     dir.create("output/bak")

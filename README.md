@@ -1,6 +1,7 @@
 ## Data for all Swiss national votes
 
 1. Duplicate the latest csv data file in *data* (named such as: **allCH_ballots - VOTES_allCH_**2016-03-01.csv ) and renamed to refect the date of the ballot
+  * hide columns N --> AN
 
 1. Get the official [BFS data](http://www.bfs.admin.ch/bfs/portal/fr/index/themen/17/03.html)
 2. Get the translated vote names from SWI ballot map (download data)
