@@ -10,7 +10,7 @@ output:
 ---
 
 ```{r setup, include = F}
-cleanOutput <- F
+cleanOutput <- T
 
 require("lintr")
 library("dplyr")
@@ -22,7 +22,7 @@ library("htmltools")
 bg.colour <-  "#f7f5ed"
 subsetLang <- NULL
 # download the raw file without footer!!!
-votefile <- "data/allCH_ballots - VOTES_allCH_2017-03-06.csv"
+votefile <- "data/allCH_ballots - VOTES_allCH_2018-06-11.csv"
 votes.read <- read.csv(votefile, check.names = F, stringsAsFactors = F)
 
 trad <- read.csv("data/allCH_ballots - translations.tsv", sep ="\t", row.names = 1, stringsAsFactors = F)
@@ -163,11 +163,18 @@ for(votetype in levels(votes.read$type)) {
 		  )) %>%
 		hc_add_theme(hc_theme_swi) %>%
     hc_legend(align='center',layout='horizontal', margin=-42, y = 50, verticalAlign='top',symbolWidth = 100,symbolHeight=7) %>%
-		hc_xAxis(min = min(data$x), max = max(data$x), ceiling = max(data$x), maxPadding = 0,  title = list(text = ""), 
-		         lineColor = "#7D8279", tickWidth = 1.5, tickLength = 7, tickColor = "#7D8279") %>%
-		hc_yAxis(min = min(data$y), max = max(data$y),
+		hc_xAxis(
+		  min = min(data$x), max = max(data$x), ceiling = max(data$x), maxPadding = 0,  title = list(text = ""), 
+		  lineColor = "#7D8279", tickWidth = 1.5, tickLength = 7, tickColor = "#7D8279",
+		  useHTML =  ifelse(lang == "ara", T, F),
+		  reversed = ifelse(lang == "ara", T, F)
+		) %>%
+		hc_yAxis(
+		  min = min(data$y), max = max(data$y),
+		  opposite = ifelse(lang == "ara", T, F),
 			maxPadding = 0, lineWidth = 0, minorGridLineWidth = 0, lineColor = 'transparent', title = list(text = ""),
-			labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0) %>%
+			labels = list(enabled = FALSE), minorTickLength = 0, tickLength =  0, gridLineWidth =  0, minorGridLineWidth = 0
+		) %>%
 		hc_tooltip(formatter = JS("function() { return this.point.name; }"), useHTML = T,
 			borderWidth = 2, backgroundColor = 'rgba(255,255,255,0.8)', style = list(padding = 3))
 
@@ -178,6 +185,7 @@ for(votetype in levels(votes.read$type)) {
 		
 		save_html(
 		  tags$html(
+		    dir = ifelse(lang == "ara", "rtl", "ltr"),
 		    tags$head(includeHTML(style_swi_highcharter())),
 		    tags$body(    
 		      div(class="h2abs", HTML(h2title)),
