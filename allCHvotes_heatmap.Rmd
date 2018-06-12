@@ -102,7 +102,7 @@ for(votetype in levels(votes.read$type)) {
 		}
 		if(typeShort == 'mandatoryReferendum') {
 			color0.5 <- '#eeeedd'
-			color1 <- ' #444422'
+			color1 <- '#444422'
 			subtitle.align <- "right"
 			subtitle.x <- -5
 			resetZoomButton.align <- "left"
